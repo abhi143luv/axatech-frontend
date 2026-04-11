@@ -1,0 +1,7 @@
+export { default as HomeHero } from './HomeHero';
+export { default as HomeIntro } from './HomeIntro';
+export { default as HomeLicenseHighlights } from './HomeLicenseHighlights';
+export { default as HomeFeaturedAddons } from './HomeFeaturedAddons';
+export { default as HomeCloudOverview } from './HomeCloudOverview';
+export { default as HomeWhyChoose } from './HomeWhyChoose';
+export { default as HomeCta } from './HomeCta';

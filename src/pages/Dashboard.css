@@ -1,0 +1,12 @@
+.dashboard-section h1 { margin-bottom: 0.25rem; }
+.dashboard-card {
+  max-width: 480px;
+  margin-top: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.dashboard-card h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+.dashboard-card p { margin-bottom: 0.5rem; }

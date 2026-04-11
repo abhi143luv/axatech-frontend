@@ -1,0 +1,61 @@
+{
+  "hash": "ceb243d5",
+  "configHash": "f4731f17",
+  "lockfileHash": "23337907",
+  "browserHash": "6b9fc543",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "d497926b",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "d7e39a5b",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "c717cc61",
+      "needsInterop": false
+    },
+    "react-helmet-async": {
+      "src": "../../node_modules/react-helmet-async/lib/index.esm.js",
+      "file": "react-helmet-async.js",
+      "fileHash": "71d125dd",
+      "needsInterop": false
+    },
+    "react-dom": {
+      "src": "../../node_modules/react-dom/index.js",
+      "file": "react-dom.js",
+      "fileHash": "a23d6151",
+      "needsInterop": true
+    },
+    "zod": {
+      "src": "../../node_modules/zod/index.js",
+      "file": "zod.js",
+      "fileHash": "ef8c2e8c",
+      "needsInterop": false
+    },
+    "sonner": {
+      "src": "../../node_modules/sonner/dist/index.mjs",
+      "file": "sonner.js",
+      "fileHash": "f26dfd0e",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-BC63SET5": {
+      "file": "chunk-BC63SET5.js"
+    },
+    "chunk-TWJRYSII": {
+      "file": "chunk-TWJRYSII.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}
