@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal, Input, Checkbox } from '../../common';
 
-export default function ServicesModal({ mode = 'create', form, setForm, onSave, onClose }) {
+export default function ServicesModal({ mode = 'create', form, setForm, onSave, onClose, isSaving = false }) {
   const [errors, setErrors] = useState({ title: '' });
 
   const validate = () => {
@@ -20,6 +20,7 @@ export default function ServicesModal({ mode = 'create', form, setForm, onSave, 
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -34,6 +35,9 @@ export default function ServicesModal({ mode = 'create', form, setForm, onSave, 
       titleId="services-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create service' : 'Update service'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating service...' : 'Updating service...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       size="3xl"
     >

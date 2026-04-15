@@ -17,6 +17,9 @@ import { CloseIcon } from '../icons';
  * @param {function(): void} [onCancel] - Cancel button handler; defaults to onClose.
  * @param {string} [primaryLabel] - Primary button label (e.g. "Create category").
  * @param {function(): void} [onPrimary] - Primary button handler (e.g. handleSave).
+ * @param {boolean} [primaryLoading=false] - Shows loading state on primary action.
+ * @param {string} [primaryLoadingLabel='Please wait...'] - Loading label for primary action.
+ * @param {boolean} [primaryDisabled=false] - Disables primary action.
  * @param {boolean} [showDelete=false] - Whether to show Delete button.
  * @param {string} [deleteLabel='Delete'] - Delete button label.
  * @param {function(): void} [onDelete] - Delete button handler.
@@ -49,6 +52,9 @@ export default function Modal({
   onCancel,
   primaryLabel,
   onPrimary,
+  primaryLoading = false,
+  primaryLoadingLabel = 'Please wait...',
+  primaryDisabled = false,
   showDelete = false,
   deleteLabel = 'Delete',
   onDelete,
@@ -81,7 +87,7 @@ export default function Modal({
       aria-labelledby={titleId}
     >
       <div
-        className={`flex max-h-[90vh] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-700 ${maxWidthClass}`}
+        className={`relative flex max-h-[90vh] w-full flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-800 dark:shadow-none dark:ring-1 dark:ring-gray-700 ${maxWidthClass}`}
       >
         <header className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 bg-slate-50/80 px-6 py-4 dark:border-gray-700 dark:bg-gray-800/95">
           <h2 id={titleId} className="text-lg font-semibold text-slate-800 dark:text-white">
@@ -92,15 +98,17 @@ export default function Modal({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+              if (primaryLoading) return;
               handleCancel?.();
             }}
-            className="cursor-pointer flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary/20 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+            disabled={primaryLoading}
+            className={`cursor-pointer flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary/20 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 ${primaryLoading ? 'cursor-not-allowed opacity-60' : ''}`}
             aria-label="Close modal"
           >
             <CloseIcon className="h-5 w-5" />
           </button>
         </header>
-        <div className="flex-1 overflow-y-auto px-6 py-5">
+        <div className={`flex-1 overflow-y-auto px-6 py-5 transition ${primaryLoading ? 'blur-[2px] pointer-events-none select-none' : ''}`}>
           {children}
         </div>
         {footer !== undefined ? (
@@ -113,22 +121,40 @@ export default function Modal({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                if (primaryLoading) return;
                 handleCancel?.();
               }}
+              disabled={primaryLoading}
             >
               {cancelLabel}
             </button>
             {showDelete && onDelete && (
-              <Button type="button" variant="error" fullWidth={false} onClick={onDelete}>
+              <Button type="button" variant="error" fullWidth={false} onClick={onDelete} disabled={primaryLoading}>
                 {deleteLabel}
               </Button>
             )}
             {primaryLabel && onPrimary && (
-              <Button type="button" variant="primary" fullWidth={false} onClick={onPrimary}>
+              <Button
+                type="button"
+                variant="primary"
+                fullWidth={false}
+                onClick={onPrimary}
+                loading={primaryLoading}
+                loadingLabel={primaryLoadingLabel}
+                disabled={primaryDisabled}
+              >
                 {primaryLabel}
               </Button>
             )}
           </footer>
+        )}
+        {primaryLoading && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/40 backdrop-blur-[1px] dark:bg-gray-900/45">
+            <div className="inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-white/90 px-4 py-2 text-sm font-medium text-primary shadow-sm dark:border-secondary/30 dark:bg-gray-800/90 dark:text-secondary">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden />
+              {primaryLoadingLabel}
+            </div>
+          </div>
         )}
       </div>
     </div>

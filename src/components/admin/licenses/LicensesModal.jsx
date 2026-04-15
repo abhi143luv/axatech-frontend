@@ -4,7 +4,7 @@ import { Modal, Input, Dropdown, Checkbox } from '../../common';
 const textareaClass =
   'w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-base text-slate-800 placeholder-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-secondary dark:focus:ring-secondary/20 min-h-[80px] resize-y';
 
-export default function LicensesModal({ mode = 'create', form, setForm, onSave, onClose }) {
+export default function LicensesModal({ mode = 'create', form, setForm, onSave, onClose, isSaving = false }) {
   const [errors, setErrors] = useState({ planName: '', type: '', price: '' });
 
   const validate = () => {
@@ -42,6 +42,7 @@ export default function LicensesModal({ mode = 'create', form, setForm, onSave, 
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -56,6 +57,9 @@ export default function LicensesModal({ mode = 'create', form, setForm, onSave, 
       titleId="license-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create plan' : 'Update plan'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating plan...' : 'Updating plan...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       size="3xl"
     >

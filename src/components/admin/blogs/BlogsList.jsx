@@ -23,6 +23,7 @@ export default function BlogsList() {
     counts: { all: 0, published: 0, draft: 0 },
   });
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
   const [imageFile, setImageFile] = useState(null);
@@ -131,12 +132,15 @@ export default function BlogsList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     let imageFilename = form.image;
     if (imageFile) {
       try {
         imageFilename = await api.upload(imageFile);
       } catch (e) {
         toast.error(`Image upload failed: ${e.message}`);
+        setIsSaving(false);
         return;
       }
     }
@@ -165,6 +169,8 @@ export default function BlogsList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save blog post');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -214,6 +220,7 @@ export default function BlogsList() {
           onClose={() => setEditing(null)}
           imageFile={imageFile}
           setImageFile={setImageFile}
+          isSaving={isSaving}
         />
       )}
     </div>

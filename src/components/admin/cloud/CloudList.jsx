@@ -17,6 +17,7 @@ export default function CloudList() {
   const [plans, setPlans] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
 
@@ -111,6 +112,8 @@ export default function CloudList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       planName: form.planName?.trim(),
       type: form.type || 'shared',
@@ -137,6 +140,8 @@ export default function CloudList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save cloud plan');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -184,6 +189,7 @@ export default function CloudList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

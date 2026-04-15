@@ -6,6 +6,7 @@
 import {
   DashboardIcon,
   HomeContentIcon,
+  HomeLogoLoopIcon,
   LicensesIcon,
   CategoriesIcon,
   ProductsIcon,
@@ -84,6 +85,7 @@ const sidebar = {
 const order = [
   'dashboard',
   'home',
+  'homeLogoLoop',
   'licenses',
   'tss',
   'categories',
@@ -101,6 +103,7 @@ const order = [
 const paths = {
   dashboard: { path: '/admin', label: 'Dashboard', end: true, Icon: DashboardIcon },
   home: { path: '/admin/home', label: 'Home Content', Icon: HomeContentIcon },
+  homeLogoLoop: { path: '/admin/home-logo-loop', label: 'Home Logo', Icon: HomeLogoLoopIcon },
   licenses: {
     path: '/admin/licenses',
     label: 'Tally',

@@ -15,6 +15,7 @@ export default function ProductsModal({
   onClose,
   onDelete,
   existingImageUrls = [],
+  isSaving = false,
 }) {
   const [errors, setErrors] = useState({});
 
@@ -44,6 +45,7 @@ export default function ProductsModal({
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -59,11 +61,19 @@ export default function ProductsModal({
       titleId="products-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create product' : 'Update product'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating...' : 'Updating...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       showDelete={mode === 'edit' && !!onDelete}
       onDelete={onDelete}
       size="3xl"
     >
+      {isSaving && (
+        <div className="mb-4 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-sm text-primary dark:border-secondary/30 dark:bg-secondary/10 dark:text-secondary">
+          Please wait, product is being saved...
+        </div>
+      )}
       <ProductForm
         form={form}
         setForm={setForm}

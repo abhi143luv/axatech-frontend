@@ -18,6 +18,7 @@ export {
   DashboardIcon,
   DashboardDuoIcon,
   HomeContentIcon,
+  HomeLogoLoopIcon,
   LicensesIcon,
   CategoriesIcon,
   ProductsIcon,

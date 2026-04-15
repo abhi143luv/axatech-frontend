@@ -14,3 +14,4 @@ export { default as Upload } from './Upload';
 export { default as Loader } from './Loader';
 export { default as SectionHeader } from './SectionHeader';
 export { default as LevelItem } from './LevelItem';
+export { default as LogoLoop } from './LogoLoop';

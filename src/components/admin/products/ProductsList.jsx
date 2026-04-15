@@ -35,6 +35,7 @@ export default function ProductsList() {
   const [sortDirection, setSortDirection] = useState('asc');
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [isSaving, setIsSaving] = useState(false);
 
   const load = () => {
     setLoading(true);
@@ -123,6 +124,8 @@ export default function ProductsList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const existingFilenames = (form.images || [])
       .map((url) =>
         typeof url === 'string' && url.includes('/uploads/') ? url.replace(/^.*\/uploads\//, '') : url
@@ -134,6 +137,7 @@ export default function ProductsList() {
         newFilenames = await Promise.all(imageFiles.map((f) => api.upload(f)));
       } catch (e) {
         toast.error('Image upload failed: ' + e.message);
+        setIsSaving(false);
         return;
       }
     }
@@ -162,6 +166,8 @@ export default function ProductsList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save product');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -229,6 +235,7 @@ export default function ProductsList() {
           onSave={save}
           onClose={() => setEditing(null)}
           existingImageUrls={editing && editing !== 'new' ? (form.images || []) : []}
+          isSaving={isSaving}
         />
       )}
     </div>

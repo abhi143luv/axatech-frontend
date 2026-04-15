@@ -18,3 +18,9 @@ export function uploadTechnologyImage(file) {
   return formRequest('/upload/technology-image', 'POST', fd).then((r) => r.url || r.filename);
 }
 
+export function uploadHomeLogoImage(file) {
+  const fd = new FormData();
+  fd.append('file', file);
+  return formRequest('/upload/home-logo-image', 'POST', fd).then((r) => r.url || r.filename);
+}
+

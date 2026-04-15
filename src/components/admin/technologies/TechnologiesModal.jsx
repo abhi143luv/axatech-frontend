@@ -8,7 +8,7 @@ const CATEGORY_OPTIONS = [
   { value: 'Database Technologies', label: 'Database Technologies' },
 ];
 
-export default function TechnologiesModal({ mode = 'create', form, setForm, onSave, onClose }) {
+export default function TechnologiesModal({ mode = 'create', form, setForm, onSave, onClose, isSaving = false }) {
   const [errors, setErrors] = useState({ title: '', description: '', category: '', image: '' });
   const [uploading, setUploading] = useState(false);
 
@@ -46,6 +46,7 @@ export default function TechnologiesModal({ mode = 'create', form, setForm, onSa
   };
 
   const handleSave = () => {
+    if (isSaving || uploading) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -78,6 +79,9 @@ export default function TechnologiesModal({ mode = 'create', form, setForm, onSa
       titleId="technology-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create' : 'Update'}
+      primaryLoading={isSaving || uploading}
+      primaryLoadingLabel={uploading ? 'Uploading image...' : mode === 'create' ? 'Creating...' : 'Updating...'}
+      primaryDisabled={isSaving || uploading}
       onPrimary={handleSave}
       size="2xl"
     >

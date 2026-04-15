@@ -7,7 +7,7 @@ const TYPE_OPTIONS = [
 ];
 const VALID_TYPES = new Set(TYPE_OPTIONS.map((option) => option.value));
 
-export default function CloudModal({ mode = 'create', form, setForm, onSave, onClose }) {
+export default function CloudModal({ mode = 'create', form, setForm, onSave, onClose, isSaving = false }) {
   const [errors, setErrors] = useState({ planName: '', type: '', price: '' });
 
   const validate = () => {
@@ -48,6 +48,7 @@ export default function CloudModal({ mode = 'create', form, setForm, onSave, onC
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -58,6 +59,9 @@ export default function CloudModal({ mode = 'create', form, setForm, onSave, onC
       titleId="cloud-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create plan' : 'Update plan'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating plan...' : 'Updating plan...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       size="2xl"
     >

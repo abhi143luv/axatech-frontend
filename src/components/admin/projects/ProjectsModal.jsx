@@ -13,6 +13,7 @@ export default function ProjectsModal({
   existingImageUrl,
   onSave,
   onClose,
+  isSaving = false,
 }) {
   const [errors, setErrors] = useState({});
 
@@ -57,6 +58,7 @@ export default function ProjectsModal({
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -72,6 +74,9 @@ export default function ProjectsModal({
       titleId="projects-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create project' : 'Update project'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating project...' : 'Updating project...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       cancelLabel="Cancel"
       onCancel={onClose}

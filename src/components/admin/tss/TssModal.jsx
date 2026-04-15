@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal, Input, Dropdown, Checkbox } from '../../common';
 
-export default function TssModal({ mode = 'create', form, setForm, onSave, onClose }) {
+export default function TssModal({ mode = 'create', form, setForm, onSave, onClose, isSaving = false }) {
   const [errors, setErrors] = useState({ title: '', type: '', price: '' });
 
   const validate = () => {
@@ -35,6 +35,7 @@ export default function TssModal({ mode = 'create', form, setForm, onSave, onClo
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -49,6 +50,9 @@ export default function TssModal({ mode = 'create', form, setForm, onSave, onClo
       titleId="tss-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create TSS plan' : 'Update TSS plan'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating TSS plan...' : 'Updating TSS plan...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       size="3xl"
     >

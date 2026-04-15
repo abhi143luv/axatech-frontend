@@ -9,6 +9,7 @@ export default function BlogsModal({
   onClose,
   imageFile,
   setImageFile,
+  isSaving = false,
 }) {
   const [errors, setErrors] = useState({ title: '', content: '' });
 
@@ -37,6 +38,7 @@ export default function BlogsModal({
   };
 
   const handleSave = () => {
+    if (isSaving) return;
     if (!validate()) return;
     onSave?.();
   };
@@ -47,6 +49,9 @@ export default function BlogsModal({
       titleId="blogs-modal-title"
       onClose={onClose}
       primaryLabel={mode === 'create' ? 'Create post' : 'Update post'}
+      primaryLoading={isSaving}
+      primaryLoadingLabel={mode === 'create' ? 'Creating post...' : 'Updating post...'}
+      primaryDisabled={isSaving}
       onPrimary={handleSave}
       size="3xl"
     >

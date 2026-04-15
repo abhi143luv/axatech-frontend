@@ -96,6 +96,10 @@ export function HomeContentIcon({ className = '' }) {
   return <Icon iconClass="icon-[streamline-plump--home-1-solid]" className={className} />;
 }
 
+export function HomeLogoLoopIcon({ className = '' }) {
+  return <Icon iconClass="icon-[line-md--hazard-lights-twotone-loop]" className={className} />;
+}
+
 export function LicensesIcon({ className = '' }) {
   return <Icon iconClass="icon-[game-icons--chalice-drops]" className={className} />;
 }
@@ -333,4 +337,29 @@ export function GithubActionsIcon({ className = '' }) {
       <Icon iconClass="icon-[skill-icons--githubactions-dark]" className={`hidden dark:inline ${className}`.trim()} />
     </>
   );
+}
+
+// Home LogoLoop tech stack icons
+export function ReactTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--react-dark]" className={className} />;
+}
+
+export function NodeTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--nodejs-dark]" className={className} />;
+}
+
+export function TypeScriptTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--typescript]" className={className} />;
+}
+
+export function TailwindTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--tailwindcss-dark]" className={className} />;
+}
+
+export function MySqlTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--mysql-dark]" className={className} />;
+}
+
+export function AwsTechIcon({ className = '' }) {
+  return <Icon iconClass="icon-[skill-icons--aws-dark]" className={className} />;
 }

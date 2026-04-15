@@ -29,6 +29,7 @@ export default function ProjectList() {
   const [list, setList] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
   const [imageFile, setImageFile] = useState(null);
@@ -117,6 +118,8 @@ export default function ProjectList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       title: form.title.trim(),
       description: form.description.trim(),
@@ -132,6 +135,7 @@ export default function ProjectList() {
         imagePath = await api.uploadProjectImage(imageFile);
       } catch (e) {
         toast.error('Image upload failed: ' + e.message);
+        setIsSaving(false);
         return;
       }
     }
@@ -149,6 +153,8 @@ export default function ProjectList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save project');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -214,6 +220,7 @@ export default function ProjectList() {
           existingImageUrl={existingImageUrl}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

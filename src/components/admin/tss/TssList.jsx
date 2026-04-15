@@ -17,6 +17,7 @@ const initialForm = {
 export default function TssList() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
   const [statusFilter, setStatusFilter] = useState('all');
@@ -150,6 +151,8 @@ export default function TssList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       title: form.title,
       type: form.type,
@@ -173,6 +176,8 @@ export default function TssList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save TSS plan');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -223,6 +228,7 @@ export default function TssList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

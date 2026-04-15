@@ -5,3 +5,4 @@ export { default as HomeFeaturedAddons } from './HomeFeaturedAddons';
 export { default as HomeCloudOverview } from './HomeCloudOverview';
 export { default as HomeWhyChoose } from './HomeWhyChoose';
 export { default as HomeCta } from './HomeCta';
+export { default as HomeLogoLoop } from './HomeLogoLoop';

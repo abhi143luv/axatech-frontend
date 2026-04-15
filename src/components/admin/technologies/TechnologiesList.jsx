@@ -19,6 +19,7 @@ export default function TechnologiesList() {
   const [technologies, setTechnologies] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
 
@@ -119,6 +120,8 @@ export default function TechnologiesList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       title: form.title?.trim(),
       description: form.description?.trim(),
@@ -138,6 +141,8 @@ export default function TechnologiesList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save technology');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -187,6 +192,7 @@ export default function TechnologiesList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

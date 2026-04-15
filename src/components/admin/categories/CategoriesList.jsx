@@ -18,6 +18,7 @@ export default function CategoriesList() {
   const [list, setList] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null); // null | 'new' | categoryId
   const [form, setForm] = useState(initialForm);
 
@@ -80,6 +81,8 @@ export default function CategoriesList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = { ...form };
     if (!payload.slug)
       payload.slug = payload.name
@@ -98,6 +101,8 @@ export default function CategoriesList() {
       refresh();
     } catch (e) {
       toast.error(e.message || 'Failed to save category');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -137,6 +142,7 @@ export default function CategoriesList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

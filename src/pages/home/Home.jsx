@@ -9,6 +9,7 @@ import {
   HomeCloudOverview,
   HomeWhyChoose,
   HomeCta,
+  HomeLogoLoop,
 } from '../../components/home';
 
 export default function Home() {
@@ -55,6 +56,7 @@ export default function Home() {
         products={products}
         featuredAddonsTitle={content.featuredAddonsTitle}
       />
+      <HomeLogoLoop />
       <HomeCloudOverview content={content} />
       <HomeWhyChoose
         whyChooseItems={content.whyChooseItems}

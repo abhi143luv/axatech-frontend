@@ -63,7 +63,10 @@ export default function Button({
 
   const content =
     loading && isButton ? (
-      loadingLabel
+      <span className="inline-flex items-center gap-2">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden />
+        {loadingLabel}
+      </span>
     ) : icon ? (
       <span className="inline-flex items-center gap-2">
         {iconPosition === 'right' ? (

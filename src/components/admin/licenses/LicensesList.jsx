@@ -19,6 +19,7 @@ const initialForm = {
 export default function LicensesList() {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
   const [statusFilter, setStatusFilter] = useState('all'); // all | active | inactive
@@ -155,6 +156,8 @@ export default function LicensesList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       planName: form.planName,
       type: form.type,
@@ -177,6 +180,8 @@ export default function LicensesList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save license plan');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -227,6 +232,7 @@ export default function LicensesList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

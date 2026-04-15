@@ -11,18 +11,18 @@ export default function HeaderTopBar({ closeMenu }) {
             <PhoneIcon className="text-[13px] shrink-0" />
             <span className="hidden sm:inline">+91 7090054701</span>
           </a>
-          <a href="mailto:info@axatech.com" className={utilityLinkClass}>
+          <a href="mailto:info@axatech.in" className={utilityLinkClass}>
             <EmailOutlineIcon className="text-[13px] shrink-0" />
-            <span className="hidden sm:inline">admin@axatech.com</span>
+            <span className="hidden sm:inline">info@axatech.in</span>
           </a>
           <span className="w-px h-4 bg-gray-300 dark:bg-gray-600 hidden sm:block" aria-hidden />
           <Link to="/contact" className={utilityLinkClass} onClick={closeMenu}>
             Career
           </Link>
-          <Link to="/contact" className={utilityLinkClass} onClick={closeMenu}>
+          {/* <Link to="/contact" className={utilityLinkClass} onClick={closeMenu}>
             <DownloadIcon className="text-[13px] shrink-0" />
             Download
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

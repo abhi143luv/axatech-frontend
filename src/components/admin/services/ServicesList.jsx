@@ -15,6 +15,7 @@ export default function ServicesList() {
   const [list, setList] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(initialForm);
 
@@ -109,6 +110,8 @@ export default function ServicesList() {
   };
 
   const save = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     const payload = {
       ...form,
       title: form.title?.trim(),
@@ -134,6 +137,8 @@ export default function ServicesList() {
       load();
     } catch (e) {
       toast.error(e.message || 'Failed to save service');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -181,6 +186,7 @@ export default function ServicesList() {
           setForm={setForm}
           onSave={save}
           onClose={() => setEditing(null)}
+          isSaving={isSaving}
         />
       )}
     </div>

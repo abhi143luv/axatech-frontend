@@ -11,6 +11,7 @@ import adminEnquiryApi from './enquiry/admin';
 import adminBlogsApi from './blogs/admin';
 import adminProjectsApi from './projects/admin';
 import adminTechnologiesApi from './technologies/admin';
+import adminHomeLogoLoopApi from './homeLogoLoop/admin';
 import adminTallyOnCloudContentApi from './tallyOnCloudContent/admin';
 import adminDedicatedVpsServerContentApi from './dedicatedVpsServerContent/admin';
 import adminIntegrationExcelImportContentApi from './integrationExcelImportContent/admin';
@@ -57,6 +58,7 @@ export function createAdminApi() {
     blogs: adminBlogsApi,
     projects: adminProjectsApi,
     technologies: adminTechnologiesApi,
+    homeLogoLoop: adminHomeLogoLoopApi,
   };
 }
 
