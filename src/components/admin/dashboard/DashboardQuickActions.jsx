@@ -1,5 +1,11 @@
 import { Button } from '../../common';
-import { HomeContentIcon, EnquiriesIcon, LicensesIcon, ProductsIcon } from '../../icons';
+import {
+  HomeContentIcon,
+  EnquiriesIcon,
+  HomeLogoLoopIcon,
+  LicensesIcon,
+  ProductsIcon,
+} from '../../icons';
 
 export default function DashboardQuickActions() {
   return (
@@ -38,6 +44,16 @@ export default function DashboardQuickActions() {
             iconPosition="left"
           >
             Tally Plans
+          </Button>
+          <Button
+            to="/admin/admin-hero-banners"
+            variant="outline"
+            fullWidth={false}
+            className="min-w-[140px]"
+            icon={<HomeLogoLoopIcon />}
+            iconPosition="left"
+          >
+            Hero banners
           </Button>
           <Button
             to="/admin/products"

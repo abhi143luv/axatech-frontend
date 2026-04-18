@@ -1,15 +1,55 @@
+import { useEffect, useState } from 'react';
+import api from '../../api';
 import { Button, SectionHeader } from '../common';
 
-export default function LicensesHero({ type, onTypeChange }) {
+const DEFAULT_TITLE = 'Tally License Pricing';
+const DEFAULT_SUBTITLE =
+  'Choose Single User or Multi User plans. Buy Now redirects to enquiry form.';
+const FALLBACK_IMG = '/images/banner/TallyLicenes.jpg';
+
+export default function LicensesHero({
+  type,
+  onTypeChange,
+  label = 'Pricing',
+  title,
+  subtitle,
+}) {
+  const [banner, setBanner] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    api
+      .adminHeroBanners({ placement: 'licenses' })
+      .then((res) => {
+        if (cancelled) return;
+        const list = Array.isArray(res) ? res : res?.items ?? [];
+        const sorted = [...list].sort(
+          (a, b) => (Number(a.sortOrder) || 0) - (Number(b.sortOrder) || 0)
+        );
+        setBanner(sorted[0] || null);
+      })
+      .catch(() => {
+        if (!cancelled) setBanner(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const displayTitle = title ?? (banner?.title?.trim() || DEFAULT_TITLE);
+  const displaySubtitle = subtitle ?? DEFAULT_SUBTITLE;
+  const imgSrc = banner?.image?.trim() || FALLBACK_IMG;
+  const imgAlt = banner?.title?.trim() || 'Tally license';
+
   return (
     <section className="hero-gradient-section py-20 md:py-24">
       <div className="max-w-6xl mx-auto px-5">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div className="animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
             <SectionHeader
-              label="Pricing"
-              title="Tally License Pricing"
-              subtitle="Choose Single User or Multi User plans. Buy Now redirects to enquiry form."
+              label={label}
+              title={displayTitle}
+              subtitle={displaySubtitle}
               position="left"
               as="h1"
               labelClassName="text-white/90 dark:text-white"
@@ -52,8 +92,8 @@ export default function LicensesHero({ type, onTypeChange }) {
           </div>
           <div className="animate-fadeInUp lg:justify-self-end" style={{ animationDelay: '0.2s' }}>
             <img
-              src="/images/banner/TallyLicenes.jpg"
-              alt="Tally license"
+              src={imgSrc}
+              alt={imgAlt}
               className="w-full max-w-[420px] rounded-2xl border border-white/20 shadow-2xl object-cover"
             />
           </div>

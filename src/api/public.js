@@ -26,9 +26,16 @@ import { cloud } from './cloud/public';
 import { enquiry } from './enquiry/public';
 import { technologies, technology } from './technologies/public';
 import { homeLogoLoop } from './homeLogoLoop/public';
+import { adminHeroBanners } from './adminHero/public';
 import { projects, project } from './projects/public';
 import { blogs, blog } from './blogs/public';
-import { upload, uploadHomeLogoImage, uploadProjectImage, uploadTechnologyImage } from './upload/public';
+import {
+  upload,
+  uploadAdminHeroImage,
+  uploadHomeLogoImage,
+  uploadProjectImage,
+  uploadTechnologyImage,
+} from './upload/public';
 
 export function createPublicApi() {
   return {
@@ -62,6 +69,7 @@ export function createPublicApi() {
     technologies,
     technology,
     homeLogoLoop,
+    adminHeroBanners,
     projects,
     project,
     blogs,
@@ -70,6 +78,7 @@ export function createPublicApi() {
     uploadProjectImage,
     uploadTechnologyImage,
     uploadHomeLogoImage,
+    uploadAdminHeroImage,
   };
 }
 

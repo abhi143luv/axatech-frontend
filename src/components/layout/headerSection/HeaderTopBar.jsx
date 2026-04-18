@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-import { PhoneIcon, EmailOutlineIcon, DownloadIcon } from '../../icons';
+import { PhoneIcon, EmailOutlineIcon } from '../../icons';
 import { HEADER_CONTAINER, utilityLinkClass } from './headerConstants';
+
+const CONTACT_EMAIL = 'admin@axatech.in';
 
 export default function HeaderTopBar({ closeMenu }) {
   return (
@@ -11,18 +13,18 @@ export default function HeaderTopBar({ closeMenu }) {
             <PhoneIcon className="text-[13px] shrink-0" />
             <span className="hidden sm:inline">+91 7090054701</span>
           </a>
-          <a href="mailto:info@axatech.in" className={utilityLinkClass}>
-            <EmailOutlineIcon className="text-[13px] shrink-0" />
-            <span className="hidden sm:inline">info@axatech.in</span>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className={`${utilityLinkClass} cursor-pointer`}
+            title={`Email ${CONTACT_EMAIL}`}
+          >
+            <EmailOutlineIcon className="text-[13px] shrink-0" aria-hidden />
+            <span className="hidden sm:inline">{CONTACT_EMAIL}</span>
           </a>
           <span className="w-px h-4 bg-gray-300 dark:bg-gray-600 hidden sm:block" aria-hidden />
           <Link to="/contact" className={utilityLinkClass} onClick={closeMenu}>
             Career
           </Link>
-          {/* <Link to="/contact" className={utilityLinkClass} onClick={closeMenu}>
-            <DownloadIcon className="text-[13px] shrink-0" />
-            Download
-          </Link> */}
         </div>
       </div>
     </div>

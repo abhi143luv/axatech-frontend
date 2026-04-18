@@ -86,6 +86,7 @@ const order = [
   'dashboard',
   'home',
   'homeLogoLoop',
+  'adminHeroBanners',
   'licenses',
   'tss',
   'categories',
@@ -104,6 +105,11 @@ const paths = {
   dashboard: { path: '/admin', label: 'Dashboard', end: true, Icon: DashboardIcon },
   home: { path: '/admin/home', label: 'Home Content', Icon: HomeContentIcon },
   homeLogoLoop: { path: '/admin/home-logo-loop', label: 'Home Logo', Icon: HomeLogoLoopIcon },
+  adminHeroBanners: {
+    path: '/admin/admin-hero-banners',
+    label: 'Hero banners',
+    Icon: LicensesIcon,
+  },
   licenses: {
     path: '/admin/licenses',
     label: 'Tally',

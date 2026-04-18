@@ -3,6 +3,7 @@ import { AdminLayout } from '../components/layout';
 import AdminDashboard from '../pages/admin/dashboard/AdminDashboard';
 import AdminHome from '../pages/admin/home/AdminHome';
 import AdminHomeLogoLoop from '../pages/admin/homeLogoLoop/AdminHomeLogoLoop';
+import AdminHeroBannerPage from '../pages/admin/adminHeroBanner/AdminHeroBanner';
 import AdminLicenses from '../pages/admin/licenses/AdminLicenses';
 import AdminTssSingleContent from '../pages/admin/tss/AdminTssSingleContent';
 import AdminTss from '../pages/admin/tss/AdminTss';
@@ -38,6 +39,7 @@ export function getAdminRoutes() {
       <Route index element={<AdminDashboard />} />
       <Route path="home" element={<AdminHome />} />
       <Route path="home-logo-loop" element={<AdminHomeLogoLoop />} />
+      <Route path="admin-hero-banners" element={<AdminHeroBannerPage />} />
       <Route path="licenses" element={<AdminLicenses />} />
       <Route path="tss-single" element={<AdminTssSingleContent />} />
       <Route path="renew-tss" element={<AdminTss />} />

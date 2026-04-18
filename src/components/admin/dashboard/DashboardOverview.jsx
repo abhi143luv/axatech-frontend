@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
-import { HomeContentIcon, ProductsIcon, EnquiriesIcon, CloudPlansIcon } from '../../icons';
+import {
+  HomeContentIcon,
+  ProductsIcon,
+  EnquiriesIcon,
+  CloudPlansIcon,
+  HomeLogoLoopIcon,
+} from '../../icons';
 
 const OVERVIEW_ITEMS = [
   {
@@ -7,6 +13,12 @@ const OVERVIEW_ITEMS = [
     description: 'Home page, blogs & services',
     Icon: HomeContentIcon,
     to: '/admin/home',
+  },
+  {
+    title: 'Hero banners',
+    description: 'Homepage carousel & licenses hero (Cloudinary)',
+    Icon: HomeLogoLoopIcon,
+    to: '/admin/admin-hero-banners',
   },
   {
     title: 'Products & Tally',

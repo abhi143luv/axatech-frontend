@@ -24,3 +24,9 @@ export function uploadHomeLogoImage(file) {
   return formRequest('/upload/home-logo-image', 'POST', fd).then((r) => r.url || r.filename);
 }
 
+export function uploadAdminHeroImage(file) {
+  const fd = new FormData();
+  fd.append('file', file);
+  return formRequest('/upload/admin-hero-image', 'POST', fd).then((r) => r.url || r.filename);
+}
+

@@ -1,4 +1,5 @@
 export { default as HomeHero } from './HomeHero';
+export { default as HomeHeroBannerSection } from './HomeHeroBannerSection';
 export { default as HomeIntro } from './HomeIntro';
 export { default as HomeLicenseHighlights } from './HomeLicenseHighlights';
 export { default as HomeFeaturedAddons } from './HomeFeaturedAddons';
